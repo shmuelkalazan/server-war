@@ -6,7 +6,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
 require("dotenv/config");
 const user_1 = __importDefault(require("./controllers/user"));
-// import adminController from "./controllers/admin"
+const launch_1 = __importDefault(require("./controllers/launch"));
 // import votesController from "./controllers/votes"
 // import candidatesController from "./controllers/candidates"
 // import { conectToMongo } from "./config/db"
@@ -29,7 +29,7 @@ app.use(express_1.default.json());
 app.use((0, cors_1.default)());
 app.use("/api/user", user_1.default);
 // app.use("/api/admin" ,adminController)
-// app.use("/api/votes" ,votesController)
+app.use("/api/launch", launch_1.default);
 // app.use("/api/candidates" ,candidatesController)
 httpServer.listen(port, () => {
     console.log("server run on port " + port);

@@ -4,9 +4,9 @@ import user ,{ Iuser } from "../models/user";
 import data from '../data/organizations.json'
 
 
-
-
-
+function getOrganizationByName(data:any[], name:string) {
+    return data.find(org => org.name === name);
+}
 
 
 export const registerServise = async (iuser:Iuser) => {
@@ -23,34 +23,21 @@ export const registerServise = async (iuser:Iuser) => {
         if (!encPass){
             return "wrong password"
         }
-        const infoIdf = data.find(org => 
-            org.name
-            .toLocaleLowerCase()
-            .includes(iuser.organization) 
-            && 
-            org.name
-            .toLocaleLowerCase()
-            .includes(iuser.location) );
 
-        const infoTerorist = data.find(org => {
+        const info =  getOrganizationByName(data,iuser.organization)
+        console.log(info)
 
-            console.log(org.name.toLocaleLowerCase() ,iuser.organization),
-            org.name
-            .toLocaleLowerCase() ==
-             iuser.organization} ) 
-        
-             console.log(infoTerorist ,infoIdf)
         const newUser =  
             {
             username:iuser.username,
             password:encPass,
             organization:iuser.organization,
             location:iuser.location,
-            resources:infoIdf?.resources,
-            budget:infoIdf?.budget
+            resources:info?.resources,
+            budget:info?.budget
         }
         const dbUser = new user(newUser)
-        // await dbUser.save()
+        await dbUser.save()
         return dbUser
     } catch (error) {
         console.log("we dont can to crate new user " ,error) 

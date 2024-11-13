@@ -8,6 +8,9 @@ const bcrypt_1 = require("bcrypt");
 const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
 const user_1 = __importDefault(require("../models/user"));
 const organizations_json_1 = __importDefault(require("../data/organizations.json"));
+function getOrganizationByName(data, name) {
+    return data.find(org => org.name === name);
+}
 const registerServise = async (iuser) => {
     try {
         if (!(iuser === null || iuser === void 0 ? void 0 : iuser.username) || !(iuser === null || iuser === void 0 ? void 0 : iuser.password)) {
@@ -23,30 +26,18 @@ const registerServise = async (iuser) => {
         if (!encPass) {
             return "wrong password";
         }
-        const infoIdf = organizations_json_1.default.find(org => org.name
-            .toLocaleLowerCase()
-            .includes(iuser.organization)
-            &&
-                org.name
-                    .toLocaleLowerCase()
-                    .includes(iuser.location));
-        const infoTerorist = organizations_json_1.default.find(org => {
-            console.log(org.name.toLocaleLowerCase(), iuser.organization),
-                org.name
-                    .toLocaleLowerCase() ==
-                    iuser.organization;
-        });
-        console.log(infoTerorist, infoIdf);
+        const info = getOrganizationByName(organizations_json_1.default, iuser.organization);
+        console.log(info);
         const newUser = {
             username: iuser.username,
             password: encPass,
             organization: iuser.organization,
             location: iuser.location,
-            resources: infoIdf === null || infoIdf === void 0 ? void 0 : infoIdf.resources,
-            budget: infoIdf === null || infoIdf === void 0 ? void 0 : infoIdf.budget
+            resources: info === null || info === void 0 ? void 0 : info.resources,
+            budget: info === null || info === void 0 ? void 0 : info.budget
         };
         const dbUser = new user_1.default(newUser);
-        // await dbUser.save()
+        await dbUser.save();
         return dbUser;
     }
     catch (error) {

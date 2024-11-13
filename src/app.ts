@@ -1,7 +1,7 @@
 import express from"express"
 import "dotenv/config"
 import userController from "./controllers/user"
-// import adminController from "./controllers/admin"
+import launchController from "./controllers/launch"
 // import votesController from "./controllers/votes"
 // import candidatesController from "./controllers/candidates"
 // import { conectToMongo } from "./config/db"
@@ -9,6 +9,7 @@ import cors from "cors"
 import http from 'http'
 import {Server} from 'socket.io'
 import { conectToMongo } from "./config/db"
+import { launch } from "./routes/launch"
 // import { handleSocketIo } from "./sokets/io"
 
 const port = process.env.PORT || 12233
@@ -30,7 +31,7 @@ app.use(express.json())
 app.use(cors())
 app.use("/api/user" ,userController)
 // app.use("/api/admin" ,adminController)
-// app.use("/api/votes" ,votesController)
+app.use("/api/launch" ,launchController)
 // app.use("/api/candidates" ,candidatesController)
 
 
