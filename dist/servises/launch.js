@@ -15,10 +15,10 @@ const createNewLaunch = async (ilaunch) => {
             intercepted: ilaunch.intercepted,
             interceptedBy: ilaunch.interceptedBy
         };
-        const dbUser = await new Launched_1.default(newLaunch);
-        await dbUser.save();
+        const dbLaunch = await new Launched_1.default(newLaunch);
+        await dbLaunch.save();
         (0, interception_1.decrementResourceAmount)(ilaunch.organizationId, ilaunch.type);
-        return dbUser;
+        return dbLaunch;
     }
     catch (error) {
         console.log("we dont can to crate new launch ", error);

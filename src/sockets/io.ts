@@ -5,23 +5,20 @@ import { createNewLaunch } from "../servises/launch";
 // import { VoteDto } from "../types/vote";
 // import { voteById } from "../servises/vote";
 
-export const handleSocketIo = (client:Socket)=>{
+export const handleSocketIo = async(client:Socket)=>{
     console.log(`[socket io] New connection ${client.id}`)
     client.on('disconnect' ,() =>{
 
     }),
-    client.on('newLaunch',(launch:Ilaunch)=>{
-        
-        switch(launch.to) { 
+    client.on('newLaunch',async(launch:Ilaunch)=>{
+        console.log(launch)
+        switch(launch?.to) { 
             case 'Center': { 
                 console.log('Center')
-               //statements; 
                break; 
             } 
             case 'North': { 
                 console.log('north')
-
-               //statements; 
                break; 
             } 
             case 'South': { 
@@ -41,10 +38,11 @@ export const handleSocketIo = (client:Socket)=>{
                break; 
             } 
          } 
-        console.log(launch)
+        // console.log(launch)
         // voteById(vote)
-        createNewLaunch(launch)
+        const newLaunch = await createNewLaunch(launch)
         console.log("entered new launch")
-        client.emit('launchedToIsrael')
+        // console.log(newLaunch)
+        client.emit('launchedToIsrael',newLaunch)
     })
 }

@@ -4,20 +4,19 @@ exports.handleSocketIo = void 0;
 const launch_1 = require("../servises/launch");
 // import { VoteDto } from "../types/vote";
 // import { voteById } from "../servises/vote";
-const handleSocketIo = (client) => {
+const handleSocketIo = async (client) => {
     console.log(`[socket io] New connection ${client.id}`);
     client.on('disconnect', () => {
     }),
-        client.on('newLaunch', (launch) => {
-            switch (launch.to) {
+        client.on('newLaunch', async (launch) => {
+            console.log(launch);
+            switch (launch === null || launch === void 0 ? void 0 : launch.to) {
                 case 'Center': {
                     console.log('Center');
-                    //statements; 
                     break;
                 }
                 case 'North': {
                     console.log('north');
-                    //statements; 
                     break;
                 }
                 case 'South': {
@@ -35,11 +34,12 @@ const handleSocketIo = (client) => {
                     break;
                 }
             }
-            console.log(launch);
+            // console.log(launch)
             // voteById(vote)
-            (0, launch_1.createNewLaunch)(launch);
+            const newLaunch = await (0, launch_1.createNewLaunch)(launch);
             console.log("entered new launch");
-            client.emit('launchedToIsrael');
+            // console.log(newLaunch)
+            client.emit('launchedToIsrael', newLaunch);
         });
 };
 exports.handleSocketIo = handleSocketIo;

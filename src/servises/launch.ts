@@ -17,10 +17,10 @@ export const createNewLaunch = async (ilaunch:Ilaunch) => {
                 intercepted:ilaunch.intercepted,
                 interceptedBy:ilaunch.interceptedBy
         }
-        const dbUser = await new Launched(newLaunch)
-        await dbUser.save()
+        const dbLaunch = await new Launched(newLaunch)
+        await dbLaunch.save()
         decrementResourceAmount(ilaunch.organizationId , ilaunch.type)
-        return dbUser
+        return dbLaunch
     } catch (error) {
         console.log("we dont can to crate new launch " ,error) 
     }
