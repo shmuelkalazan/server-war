@@ -9,37 +9,32 @@ const handleSocketIo = async (client) => {
     client.on('disconnect', () => {
     }),
         client.on('newLaunch', async (launch) => {
-            console.log(launch);
-            switch (launch === null || launch === void 0 ? void 0 : launch.to) {
-                case 'Center': {
-                    console.log('Center');
-                    break;
-                }
-                case 'North': {
-                    console.log('north');
-                    break;
-                }
-                case 'South': {
-                    console.log('south');
-                    //statements; 
-                    break;
-                }
-                case 'West Bank': {
-                    console.log('wb');
-                    //statements; 
-                    break;
-                }
-                default: {
-                    //statements; 
-                    break;
-                }
-            }
             // console.log(launch)
-            // voteById(vote)
+            // switch(launch?.to) { 
+            //     case 'Center': { 
+            //         client.broadcast.emit('Center',launch)
+            //        break; 
+            //     } 
+            //     case 'North': { 
+            //         client.broadcast.emit('North',launch)
+            //        break; 
+            //     } 
+            //     case 'South': { 
+            //         client.broadcast.emit('South',launch)
+            //         break; 
+            //      }             
+            //      case 'West Bank': { 
+            //         // console.log('West Bank')
+            //         client.broadcast.emit('West Bank',launch)
+            //         break; 
+            //      } 
+            //     default: { 
+            //        break; 
+            //     } 
+            //  } 
             const newLaunch = await (0, launch_1.createNewLaunch)(launch);
             console.log("entered new launch");
-            // console.log(newLaunch)
-            client.emit('launchedToIsrael', newLaunch);
+            client.broadcast.emit('launchedToIsrael', newLaunch);
         });
 };
 exports.handleSocketIo = handleSocketIo;

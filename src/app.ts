@@ -21,8 +21,8 @@ export const io = new Server(httpServer ,{
     cors: {
         origin :'*',
         methods :'*'
-    }
-})
+    },
+});
 
 io.on('connection' ,handleSocketIo)
 

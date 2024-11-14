@@ -24,7 +24,7 @@ exports.io = new socket_io_1.Server(httpServer, {
     cors: {
         origin: '*',
         methods: '*'
-    }
+    },
 });
 exports.io.on('connection', io_1.handleSocketIo);
 (0, db_1.conectToMongo)();
