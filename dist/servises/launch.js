@@ -5,6 +5,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.createNewLaunch = void 0;
 const Launched_1 = __importDefault(require("../models/Launched"));
+const interception_1 = require("./interception");
 const createNewLaunch = async (ilaunch) => {
     try {
         const newLaunch = {
@@ -14,8 +15,9 @@ const createNewLaunch = async (ilaunch) => {
             intercepted: ilaunch.intercepted,
             interceptedBy: ilaunch.interceptedBy
         };
-        const dbUser = new Launched_1.default(newLaunch);
+        const dbUser = await new Launched_1.default(newLaunch);
         await dbUser.save();
+        (0, interception_1.decrementResourceAmount)(ilaunch.organizationId, ilaunch.type);
         return dbUser;
     }
     catch (error) {

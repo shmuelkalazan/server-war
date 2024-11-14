@@ -36,8 +36,9 @@ const registerServise = async (iuser) => {
             resources: info === null || info === void 0 ? void 0 : info.resources,
             budget: info === null || info === void 0 ? void 0 : info.budget
         };
-        const dbUser = new user_1.default(newUser);
+        const dbUser = await new user_1.default(newUser);
         await dbUser.save();
+        console.log(dbUser);
         return dbUser;
     }
     catch (error) {

@@ -26,7 +26,7 @@ export const registerServise = async (iuser:Iuser) => {
 
         const info =  getOrganizationByName(data,iuser.organization)
         console.log(info)
-
+        
         const newUser =  
             {
             username:iuser.username,
@@ -36,8 +36,9 @@ export const registerServise = async (iuser:Iuser) => {
             resources:info?.resources,
             budget:info?.budget
         }
-        const dbUser = new user(newUser)
+        const dbUser = await new user(newUser)
         await dbUser.save()
+        console.log(dbUser)
         return dbUser
     } catch (error) {
         console.log("we dont can to crate new user " ,error) 

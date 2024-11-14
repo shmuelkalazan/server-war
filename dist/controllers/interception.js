@@ -1,6 +1,7 @@
 "use strict";
-// import { Router } from "express";
-// import { login, register } from "../routes/user";
-// const router = Router()
-// router.post("/login" ,login)
-// export default router
+Object.defineProperty(exports, "__esModule", { value: true });
+const express_1 = require("express");
+const interception_1 = require("../routes/interception");
+const router = (0, express_1.Router)();
+router.post("/", interception_1.interception);
+exports.default = router;

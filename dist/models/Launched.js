@@ -7,8 +7,8 @@ const launchSchema = new mongoose_1.Schema({
     to: String,
     intercepted: {
         type: Boolean,
-        default: false
+        default: false,
     },
-    interceptedBy: String
+    interceptedBy: String,
 });
 exports.default = (0, mongoose_1.model)("Launch", launchSchema);

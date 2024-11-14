@@ -7,11 +7,13 @@ const userSchema = new mongoose_1.Schema({
     organization: String,
     location: String,
     resources: {
-        type: [{
+        type: [
+            {
                 name: String,
-                amount: Number
-            }]
+                amount: Number,
+            },
+        ],
     },
-    budget: String
+    budget: String,
 });
 exports.default = (0, mongoose_1.model)("User", userSchema);
