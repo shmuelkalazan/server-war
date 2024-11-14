@@ -11,30 +11,7 @@ export const handleSocketIo = async(client:Socket)=>{
 
     }),
     client.on('newLaunch',async(launch:Ilaunch)=>{
-        // console.log(launch)
-        // switch(launch?.to) { 
-        //     case 'Center': { 
-            
-        //         client.broadcast.emit('Center',launch)
-        //        break; 
-        //     } 
-        //     case 'North': { 
-        //         client.broadcast.emit('North',launch)
-        //        break; 
-        //     } 
-        //     case 'South': { 
-        //         client.broadcast.emit('South',launch)
-        //         break; 
-        //      }             
-        //      case 'West Bank': { 
-        //         // console.log('West Bank')
-        //         client.broadcast.emit('West Bank',launch)
-        //         break; 
-        //      } 
-        //     default: { 
-        //        break; 
-        //     } 
-        //  } 
+
 
         const newLaunch = await createNewLaunch(launch)
         console.log("entered new launch")
